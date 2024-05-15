@@ -2,8 +2,8 @@
 
 -- 문제 1. 
 -- 최고임금(salary)과  최저임금을 “최고임금, “최저임금”프로젝션 타이틀로 함께 출력해 보세요. 두 임금의 차이는 얼마인가요? 함께 “최고임금 – 최저임금”이란 타이틀로 출력해 보세요.
-select max(salary) as '최고임금',
-	   min(salary) as '최저임금',
+select max(salary) as 최고임금,
+	   min(salary) as 최저임금,
        max(salary)-min(salary) as '최고임금-최저임금'
 from salaries;
 
@@ -27,7 +27,7 @@ where to_date = '9999-01-01';
 
 -- 문제5.
 -- 현재 이 회사의 최고/최저 연봉은 얼마입니까?
-select max(salary) as '최고연봉', min(salary) as '최저연봉'
+select max(salary) as 최고연봉, min(salary) as 최저연봉
 from salaries
 where to_date = '9999-01-01';
 
