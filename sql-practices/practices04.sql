@@ -86,9 +86,18 @@ where a.emp_no = b.emp_no
 
 
 
--- 문제4.  **매니저 이름이 어디?
+-- 문제4.
 -- 현재, 사원들의 사번, 이름, 매니저 이름, 부서 이름으로 출력해 보세요.
 -- 사원 , 매니저 
+select a.emp_no as 사번, concat(a.first_name, ' ', a.last_name) as 이름, concat(e.first_name, ' ', e.last_name) as 매니저이름, d.dept_name as 부서이름
+from employees a, dept_emp b, dept_manager c, departments d, employees e
+where a.emp_no = b.emp_no
+  and b.emp_no = c.emp_no
+  and c.dept_no = d.dept_no
+  and c.emp_no = e.emp_no
+  and b.to_date = '9999-01-01'
+  and c.to_date = '9999-01-01'
+;
 
 
 select a.emp_no as 사번, concat(c.first_name, ' ', c.last_name) as 이름, c.dept_name as 부서이름 
@@ -170,6 +179,8 @@ select b.dept_name, avg(c.salary) as 평균연봉
 from dept_emp a, departments b, salaries c
 where a.dept_no = b.dept_no
   and a.emp_no = c.emp_no
+  -- and a.to_date = '9999-01-01'
+  -- and c.to_date = '9999-01-01'
 group by b.dept_name
 order by 평균연봉 desc  -- 'Sales', '80667.6058' 
 limit 0,1 ;
@@ -181,6 +192,8 @@ limit 0,1 ;
 select a.title, avg(b.salary) as 평균연봉
 from titles a, salaries b
 where a.emp_no = b.emp_no
+  -- and a.to_date = '9999-01-01'
+  -- and b.to_date = '9999-01-01'
 group by a.title
 order by 평균연봉 desc  -- 'Senior Staff', '70470.8353'
 limit 0,1;
@@ -196,7 +209,7 @@ where a.emp_no = b.emp_no
   and b.to_date = '9999-01-01'
 group by a.dept_no;
 
-select *
+select concat(a.first_name + ' ' + a.last_name) 
 from employees a, salaries b, dept_manager c, (
 	select a.dept_no, avg(b.salary)
 	from dept_manager a, salaries b
