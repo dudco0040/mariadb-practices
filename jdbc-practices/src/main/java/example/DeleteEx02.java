@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DeleteEx02 {
 
@@ -27,12 +26,15 @@ public class DeleteEx02 {
 			String url = "jdbc:mariadb://192.168.0.202:3306/webdb?charset=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 
-			//3. Statement 생성하기
-			pstmt = conn.prepareStatement();
+			//3. Statement 준비
+			String sql = "delete from dept where no = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			//4. binding
+			pstmt.setLong(1, no);
 			
 			//4. SQL 실행
-			String sql = "delete from dept where no = " + no;
-			int count = pstmt.executeUpdate(sql);
+			int count = pstmt.executeUpdate();
 			
 			//5. 결과 처리
 			result = count == 1;
