@@ -34,13 +34,17 @@ public class EmailListDaoTest {
 		vo.setEmail("dooly@gmail.com");
 		
 		boolean result = new EmaillistDao().insert(vo);
-		assertTrue(result); // true이면 명령어 사용을 성공함을 뜻함 
+		assertTrue(result); // true 이면 명령어 사용을 성공함을 뜻함
 		
 	}
 	@Test
 	@Order(2)
 	public void testFindByAll() {
 		List<EmaillistVo> list = new EmaillistDao().findAll();
+		System.out.println(count+1);
+		System.out.println(list.size());
+		
+		
 		assertEquals(count + 1, list.size());
 	}
 	
@@ -48,7 +52,7 @@ public class EmailListDaoTest {
 	@Order(3)
 	public void testDeleteByEmail() {
 		boolean result = new EmaillistDao().deleteByEmail("dooly@gmail.com");
-		assertTrue(result); 
+		assertTrue(result);
 
 	}
 	

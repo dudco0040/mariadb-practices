@@ -72,7 +72,7 @@ public class EmaillistDao {
 			Class.forName("org.mariadb.jdbc.Driver");
 			
 			//2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.203:3306/webdb?charset=utf8";
+			String url = "jdbc:mariadb://192.168.0.202:3306/webdb?charset=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 
 			//3. Statement 준비
@@ -121,7 +121,7 @@ public class EmaillistDao {
 			Class.forName("org.mariadb.jdbc.Driver");
 			
 			//2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.203:3306/webdb?charset=utf8";
+			String url = "jdbc:mariadb://192.168.0.202:3306/webdb?charset=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 
 			//3. Statement 준비
@@ -146,6 +146,9 @@ public class EmaillistDao {
 				vo.setLastName(lastName);
 				vo.setEmail(email);
 				System.out.println(no + ":" + firstName + ":" + lastName);
+				// result add - DB에는 들어있는데 list는 없음
+				result.add(vo);
+				
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
