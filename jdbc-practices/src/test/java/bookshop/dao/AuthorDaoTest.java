@@ -30,10 +30,8 @@ public class AuthorDaoTest {
 	@Order(1)
 	public void testInsert() {
 		mockAuthorVo.setName("칼세이건");
+		authorDao.insert(mockAuthorVo);
 		
-		boolean result = authorDao.insert(mockAuthorVo);
-		// assertTrue(result);
-		System.out.println(mockAuthorVo);
 		assertNull(mockAuthorVo.getNo());
 	}
 	
@@ -46,6 +44,6 @@ public class AuthorDaoTest {
 	
 	@AfterAll
 	public static void cleanUp() {
-		authorDao.deleteByNo(mockAuthorVo.getName());
+		authorDao.deleteByNo(mockAuthorVo.getNo());
 	}
 }
