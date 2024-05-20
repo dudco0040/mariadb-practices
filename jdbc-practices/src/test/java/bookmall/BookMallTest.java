@@ -1,12 +1,7 @@
 package bookmall;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +23,6 @@ import bookmall.vo.UserVo;
  *  
  */
 public class BookMallTest {
-	
 	private static UserVo mockUserVo01 = new UserVo("데스트유저01", "test01@test.com", "1234", "010-0000-0000");
 	private static UserVo mockUserVo02 = new UserVo("데스트유저02", "test02@test.com", "1234", "010-1111-1111");
 	
@@ -109,10 +103,11 @@ public class BookMallTest {
 	}
 
 	@Test
-	public void tset() {
-		assertTrue(1-1 == 0);
+	public void test() {
+		assertTrue(1-1==0);
 	}
-//	@Test
+	
+//	@Test  // ok
 //	public void testUser() {
 //		assertEquals(2, userDao.findAll().size());
 //	}
