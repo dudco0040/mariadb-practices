@@ -35,7 +35,7 @@ public class AuthorDao {
 				PreparedStatement pstmt = conn.prepareStatement("select no, name from author");
 				ResultSet rs = pstmt.executeQuery();   // 현재는 바인딩이 없는 경우, rs를 여기에 위치해도 된다.!
 			) {
-			
+		
 				// 바인딩이 필요할 경우, 여기에 실행 
 				//5. SQL 실행
 				// rs = pstmt.executeQuery();

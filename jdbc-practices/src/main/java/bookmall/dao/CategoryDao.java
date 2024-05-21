@@ -51,4 +51,47 @@ public class CategoryDao {
 		return result;
 	}
 
+	public List<CategoryVo> findAll() {
+		List<CategoryVo> result = new ArrayList<>();
+		
+		try (
+			Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("select no, name from category");
+			ResultSet rs = pstmt.executeQuery();
+		){
+			while(rs.next()) {
+				Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				
+				CategoryVo vo = new CategoryVo(name);
+				vo.setName(name);
+				
+				result.add(vo);
+				
+				System.out.println(" find success:" + no + " "+ name );
+				
+			}
+			
+		} catch (SQLException e) {
+					
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+
+	public void deleteByNo(Long no) {
+		try(
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("delete from category where no = ?");
+		) {
+			pstmt.setLong(1,no);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

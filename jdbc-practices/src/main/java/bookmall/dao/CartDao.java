@@ -44,5 +44,59 @@ public class CartDao {
 				System.out.println("error:" + e);
 			}
 	}
+
+	public void deleteByUserNoAndBookNo(Long userNo, Long no) {
+		try(
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("delete from cart where book_no = ? and user_no = ?");
+
+			) {
+				// binding
+				pstmt.setLong(1,no);
+				pstmt.setLong(2, userNo);
+				pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<CartVo> findByUserNo(Long no) {
+		List<CartVo> result = new ArrayList<>();
+		
+		
+		try(
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("select a.user_no, a.book_no, b.title, a.quantity from cart a, book b where a.book_no = b.no and user_no = ?");
+				
+			) {
+				
+				pstmt.setLong(1, no);
+				ResultSet rs = pstmt.executeQuery();
+				
+			while(rs.next()) {
+				Long user_no = rs.getLong(1);
+				Long book_no = rs.getLong(2);
+				String book_title = rs.getString(3);
+				int quantity = rs.getInt(4);
+				
+				CartVo vo = new CartVo();
+				vo.setUserNo(user_no);
+				vo.setBookNo(book_no);
+				vo.setBookTitle(book_title);
+				vo.setQuantity(quantity);
+				
+				result.add(vo);
+				System.out.println("find success: "+ user_no + book_no + quantity);
+			}
+			rs.close(); // 자동으로 close가 되지 않으니 닫아줘야한다.
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 }

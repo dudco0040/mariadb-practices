@@ -1,16 +1,30 @@
 package bookmall.vo;
 
 public class OrderBookVo {
-	private String orderNo;
+	private Long orderNo;
 	private Long bookNo;
 	private int quantity;
 	private int price;
+	private Long userNo;
+	private String bookTitle;
 	
 		
-	public String getOrderNo() {
+	public String getBookTitle() {
+		return bookTitle;
+	}
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
+	public Long getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(Long userNo) {
+		this.userNo = userNo;
+	}
+	public Long getOrderNo() {
 		return orderNo;
 	}
-	public void setOrderNo(String orderNo) {
+	public void setOrderNo(Long orderNo) {
 		this.orderNo = orderNo;
 	}
 	public Long getBookNo() {
@@ -37,6 +51,10 @@ public class OrderBookVo {
 	public String toString() {
 		return "OrderVo[ orderNo = " + orderNo + ", bookNo = " + bookNo + ", quantity = " + quantity + ", price = " + price + "]";
 	}
+//	public Object getBookTitle() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 
 }

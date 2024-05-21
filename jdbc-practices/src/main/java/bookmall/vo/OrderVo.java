@@ -8,7 +8,14 @@ public class OrderVo {
 	private String shipping;
 	private Long userNo;
 	
-	
+//	public OrderVo(String number, String status, int payment, String shipping, Long userNo) {
+//		this.number = number;
+//		this.status = status;
+//		this.payment= payment;
+//		this.shipping = shipping;
+//		this.userNo = userNo;
+//		
+//	}
 	
 	public Long getNo() {
 		return no;

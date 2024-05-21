@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bookmall.vo.UserVo;
-import bookshop.vo.AuthorVo;
 
 public class UserDao {
 	private static Connection getConnection() throws SQLException{
@@ -53,38 +52,59 @@ public class UserDao {
 			
 		return result;
 	}
-		
-		
 
-//		public List<AuthorVo> findAll() {
-//			List<AuthorVo> result = new ArrayList<>();
-//		
-//			try (
-//				Connection conn = getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement("select no, name, phone_number, email, password from user order by no desc");
-//				ResultSet rs = pstmt.executeQuery();
-//			) {
-//				while(rs.next()) {
-//					Long no = rs.getLong(1);
-//					String name = rs.getString(2);
-//					
-//					AuthorVo vo = new AuthorVo();
-//					vo.setNo(no);
-//					vo.setName(name);
-//					
-//					result.add(vo);
-//				}
-//				
-//			} catch (SQLException e) {
-//				System.out.println("error:" + e);
-//			}
-//			
-//			
-//			return result;
-//		}
-//	
+	public List<UserVo> findAll() {
+		List<UserVo> result = new ArrayList<>();
 	
-	
+		try (
+			Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("select no, name, phone_number, email, password from user");
+			ResultSet rs = pstmt.executeQuery();
+		) {
+			while(rs.next()) {
+				Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				String phone_number = rs.getString(3);
+				String email = rs.getString(4);
+				String password = rs.getString(5);
+				
+				UserVo vo = new UserVo(name, phone_number, email, password);
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setPhoneNumber(phone_number);
+				vo.setEmail(email);
+				vo.setPassword(password);
+				
+				result.add(vo);
+
+				System.out.println(" find success:" + no + " "+ name + " " + phone_number + " "+ email + " "+ password);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		
+		return result;
+	}
+
+	public void deleteByNo(Long no) {
+		try(
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("delete from user where no = ?");
+		) {
+			pstmt.setLong(1,no);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
+
 
 	
 //	public void insert(UserVo vo) {

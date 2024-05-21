@@ -51,4 +51,17 @@ public class BookDao {
 		return result;
 		
 	}
+
+	public void deleteByNo(Long no) {
+		try(
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("delete from book where no = ?");
+		) {
+			pstmt.setLong(1,no);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
