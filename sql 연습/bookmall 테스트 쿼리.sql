@@ -26,5 +26,20 @@ from ( select b.book_no, a.user_no, b.order_no, b.quantity, b.price from orders 
 where a.book_no = b.no;
 
 
+select b.book_no, a.user_no, b.order_no, b.quantity, b.price from orders a, order_book b where a.no = b.order_no and a.no = ? and a.user_no =?;
 
-select b.book_no, a.user_no, b.order_no, b.quantity, b.price from orders a, order_book b where a.no = b.order_no and a.no = ? and a.user_no =?
+select b.book_no, a.user_no, b.order_no, b.quantity, b.price from orders a, order_book b where a.no = b.order_no ;
+
+select * -- a.user_no, b.book_no, c.title, b.quantity, b.price
+from orders a, order_book b, book c
+where a.no = b.order_no
+  and b.book_no = c.no
+;
+
+
+select a.user_no, b.book_no, c.title, b.quantity, b.price
+from orders a, order_book b, book c
+where a.no = b.order_no
+  and b.book_no = c.no
+  and a.no = ? and a.user_no =?
+;
